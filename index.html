@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoolShy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Аватарка ВНЕ фона -->
+    <div class="avatar-container">
+        <img src="img/avatar.jpg" alt="NoolShy" class="avatar" id="avatar" onerror="handleAvatarError(this)">
+        <div class="avatar-glow"></div>
+    </div>
+
+    <!-- Неоновый фон для NOOLSHY и кнопки -->
+    <div class="neon-background"></div>
+    
+    <!-- Сетка -->
+    <div class="grid-overlay"></div>
+    
+    <!-- Главный контейнер -->
+    <main class="container">
+        <!-- Секция с NOOLSHY и кнопкой (с фоном) -->
+        <section class="main-section">
+            <h1 class="nickname">NOOLSHY</h1>
+            
+            <!-- Кнопка -->
+            <div class="button-container">
+                <a href="https://t.me/+DviGYUKflNo2MDAy" class="neon-btn" target="_blank">
+                    <div class="btn-glow"></div>
+                    <div class="btn-content">
+                        <i class="fab fa-telegram btn-icon"></i>
+                        <div class="btn-text-wrapper">
+                            <span class="btn-text">Project</span>
+                            <div class="btn-underline"></div>
+                        </div>
+                    </div>
+                    <div class="btn-pulse"></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Описание (ниже всего) -->
+        <section class="description-section">
+            <div class="description-box">
+                <div class="status-dot"></div>
+                <span class="description-text">test</span>
+                <div class="status-pulse"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Статические помехи -->
+    <div class="static-overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+/* ==================== ОБЩИЕ СТИЛИ ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', monospace;
+}
+
+body {
+    background: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+/* ==================== АВАТАРКА (ВНЕ ФОНА) ==================== */
+.avatar-container {
+    position: absolute;
+    top: 40px; /* Чуть выше */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    width: 160px; /* Немного меньше */
+    height: 160px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 
+        0 0 50px rgba(255, 255, 255, 0.1),
+        inset 0 0 30px rgba(255, 255, 255, 0.05);
+    background: #111;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: 
+        grayscale(1)
+        contrast(1.2)
+        brightness(0.9);
+    transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+    position: relative;
+    z-index: 2;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+    filter: 
+        grayscale(0.5)
+        contrast(1.5)
+        brightness(1);
+}
+
+.avatar-glow {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    z-index: 0;
+    opacity: 0.5;
+    animation: glowPulse 3s infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { opacity: 0.3; transform: scale(1); }
+    100% { opacity: 0.6; transform: scale(1.05); }
+}
+
+/* ==================== ФОНОВЫЕ ЭФФЕКТЫ (ТОЛЬКО ДЛЯ NOOLSHY И КНОПКИ) ==================== */
+.neon-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45vh; /* Чуть меньше, чтобы аватарка была выше */
+    background: 
+        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.05) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+    z-index: 1;
+    animation: pulse 15s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.9; }
+    100% { opacity: 1; }
+}
+
+.grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.static-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.02) 2px,
+            rgba(255, 255, 255, 0.02) 4px
+        );
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.05;
+    animation: static 0.1s infinite;
+}
+
+@keyframes static {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
+
+/* ==================== ГЛАВНЫЙ КОНТЕЙНЕР ==================== */
+.container {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 120px; /* Больше отступ для аватарки */
+}
+
+/* ==================== СЕКЦИЯ С NOOLSHY И КНОПКОЙ (С ФОНОМ) ==================== */
+.main-section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px 50px; /* Убрали лишний паддинг сверху */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    box-shadow: 
+        0 0 40px rgba(255, 255, 255, 0.1),
+        inset 0 0 30px rgba(255, 255, 255, 0.05);
+    margin-bottom: 30px;
+    animation: appear 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes appear {
+    to {
+        opacity: 1;
+    }
+}
+
+/* УБРАЛ анимированную линию */
+/* .main-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.8), 
+        transparent);
+    animation: scanline 4s linear infinite;
+} */
+
+/* ==================== НИКНЕЙМ ==================== */
+.nickname {
+    font-size: 3.8rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px rgba(255, 255, 255, 0.5);
+    letter-spacing: 8px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    animation: neonText 3s ease-in-out infinite alternate;
+}
+
+@keyframes neonText {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px #fff,
+            0 0 20px #fff,
+            0 0 40px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 20px rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* ==================== КНОПКА ==================== */
+.button-container {
+    margin-top: 10px;
+}
+
+.neon-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    box-shadow: 
+        0 0 60px rgba(255, 255, 255, 0.1),
+        inset 0 0 40px rgba(255, 255, 255, 0.05);
+    animation: float 4s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        box-shadow: 
+            0 0 60px rgba(255, 255, 255, 0.1),
+            inset 0 0 40px rgba(255, 255, 255, 0.05);
+    }
+    100% {
+        transform: translateY(-8px) rotate(2deg);
+        box-shadow: 
+            0 0 80px rgba(255, 255, 255, 0.2),
+            inset 0 0 50px rgba(255, 255, 255, 0.1);
+    }
+}
+
+.neon-btn:hover {
+    transform: scale(1.1) rotate(-3deg);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 0 120px rgba(255, 255, 255, 0.3),
+        inset 0 0 60px rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    animation-play-state: paused;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.neon-btn:hover .btn-glow {
+    opacity: 1;
+}
+
+.btn-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: btnPulse 3s infinite;
+    z-index: 1;
+}
+
+@keyframes btnPulse {
+    0% { 
+        width: 0; 
+        height: 0; 
+        opacity: 0.8; 
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1);
+    }
+    100% { 
+        width: 210px; 
+        height: 210px; 
+        opacity: 0; 
+        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+    }
+}
+
+.btn-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.btn-icon {
+    font-size: 3rem;
+    color: #fff;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.neon-btn:hover .btn-icon {
+    transform: scale(1.4);
+    text-shadow: 
+        0 0 40px rgba(255, 255, 255, 0.8),
+        0 0 80px rgba(255, 255, 255, 0.4);
+}
+
+.btn-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #fff;
+    transition: all 0.4s ease;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.neon-btn:hover .btn-text {
+    letter-spacing: 5px;
+    text-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.8),
+        0 0 60px rgba(255, 255, 255, 0.4);
+}
+
+.btn-underline {
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #fff, 
+        transparent);
+    transition: all 0.4s ease;
+}
+
+.neon-btn:hover .btn-underline {
+    width: 100%;
+    box-shadow: 0 0 10px #fff;
+}
+
+/* ==================== СЕКЦИЯ ОПИСАНИЯ (НИЖЕ ВСЕГО) ==================== */
+.description-section {
+    width: 100%;
+    max-width: 600px;
+    animation: appear 1s ease-out 0.3s forwards;
+    opacity: 0;
+    margin-top: 30px;
+}
+
+.description-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 
+        0 0 15px #fff,
+        inset 0 0 8px #000;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { 
+        opacity: 0.7; 
+        box-shadow: 
+            0 0 15px #fff,
+            inset 0 0 8px #000;
+    }
+    50% { 
+        opacity: 1; 
+        box-shadow: 
+            0 0 20px #fff,
+            0 0 40px rgba(255, 255, 255, 0.3),
+            inset 0 0 10px #000;
+    }
+}
+
+.description-text {
+    color: #fff;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 300;
+    opacity: 0.9;
+    padding: 5px 0;
+}
+
+.status-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+    100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
+}
+
+/* ==================== АДАПТИВНОСТЬ ==================== */
+@media (max-width: 768px) {
+    .avatar-container {
+        width: 130px;
+        height: 130px;
+        top: 30px;
+    }
+    
+    .container {
+        margin-top: 100px;
+        padding: 30px 15px;
+        gap: 25px;
+    }
+    
+    .main-section {
+        padding: 50px 20px 40px;
+        margin-bottom: 25px;
+    }
+    
+    .nickname {
+        font-size: 2.6rem;
+        letter-spacing: 6px;
+        margin-bottom: 25px;
+    }
+    
+    .neon-btn {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .btn-icon {
+        font-size: 2.5rem;
+    }
+    
+    .btn-text {
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+    }
+    
+    .btn-pulse {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .description-box {
+        padding: 15px 20px;
+    }
+    
+    .description-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .avatar-container {
+        width: 110px;
+        height: 110px;
+        top: 25px;
+    }
+    
+    .container {
+        margin-top: 85px;
+        gap: 20px;
+    }
+    
+    .main-section {
+        padding: 45px 15px 35px;
+    }
+    
+    .nickname {
+        font-size: 2rem;
+        letter-spacing: 4px;
+        margin-bottom: 20px;
+    }
+    
+    .neon-btn {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .btn-icon {
+        font-size: 2.2rem;
+    }
+    
+    .btn-content {
+        gap: 15px;
+    }
+    
+    .btn-text {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+    
+    .btn-pulse {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .description-box {
+        flex-direction: column;
+        gap: 12px;
+        padding: 14px 18px;
+    }
+    
+    .description-text {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+}
